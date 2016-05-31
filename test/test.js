@@ -3,7 +3,7 @@ var request = require("request");
 require("chai").should();
 
 describe("interface", function() {
-	var salary = require("../index")();
+	var salary = require("../index");
 	describe("and", function() {
 		it("should have 1 job after calling 'and' before 'of'", function() {
 			salary.and("developer", 31419);
@@ -16,12 +16,26 @@ describe("interface", function() {
 			jobs[0].should.have.property("zip").equal(31419);
 		});
 	});
-
-	describe("of", function() {
-		it("should have 2 job after calling 'of' after 'and'", function() {
-			salary.of("developer", 31419);
+	
+	describe("for", function() {
+		it("should have 1 job after calling 'for'", function() {
+			salary.for("develop", 31419);
 			salary.should.have.property("__jobs");
 			salary.__jobs.should.be.length(2);
+		});
+		
+		it("should have 3 jobs after calling for with an array of length 3", function() {
+			salary.for(["developer", "programmer"], 31406);
+			salary.should.have.property("__jobs");
+			salary.__jobs.should.be.length(4);
+		});
+	});
+
+	describe("of", function() {
+		it("should have 5 job after calling 'for', 'of' after 'and'", function() {
+			salary.of("developer", 31419);
+			salary.should.have.property("__jobs");
+			salary.__jobs.should.be.length(5);
 		});
 		it("'of' should add job object with title and zip props", function() {
 			var jobs = salary.__jobs;

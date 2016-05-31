@@ -1,7 +1,7 @@
 var util = require("./utils");
 
 var DOMAIN = "http://www.indeed.com/salary";
-module.exports = function() {
+module.exports = (function() {
 	var self = {};
 	self.of = function(title, zip) {
 		if (!self.__jobs) { self.__jobs = []; }
@@ -20,7 +20,7 @@ module.exports = function() {
 				self.of(val, zip);
 			});
 		} else {
-			self.of(val, zip);
+			self.of(titles, zip);
 		}
 	};
 	self.then = function(cb) {
@@ -36,4 +36,4 @@ module.exports = function() {
 		});
 	};
 	return self;
-};
+})();
